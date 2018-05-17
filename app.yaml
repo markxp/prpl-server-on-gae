@@ -1,0 +1,51 @@
+service: default
+runtime: go
+api_version: go1.8
+
+instance_class: F1
+
+handlers:
+- url: /20180517131237/es5-bundled/index.html
+  script: _go_app
+  secure: always
+
+- url: /20180517131237/es5-bundled/service-worker.js
+  static_files: build/es5-bundled/service-worker.js
+  upload: build/es5-bundled/service-worker.js
+  secure: always
+  http_headers:
+    Cache-Control: "private, max-age=0, must-revalidate"
+    Service-Worker-Allowed: "/"
+
+- url: /20180517131237/es5-bundled/
+  static_dir: build/es5-bundled/
+  application_readable: true
+  secure: always
+  http_headers:
+    Cache-Control: "public, max-age=31536000, immutable"
+
+- url: /20180517131237/es6-unbundled/index.html
+  script: _go_app
+  secure: always
+
+- url: /20180517131237/es6-unbundled/service-worker.js
+  static_files: build/es6-unbundled/service-worker.js
+  upload: build/es6-unbundled/service-worker.js
+  secure: always
+  http_headers:
+    Cache-Control: "private, max-age=0, must-revalidate"
+    Service-Worker-Allowed: "/"
+
+- url: /20180517131237/es6-unbundled/
+  static_dir: build/es6-unbundled/
+  application_readable: true
+  secure: always
+  http_headers:
+    Cache-Control: "public, max-age=31536000, immutable"
+
+- url: /.*
+  script: _go_app
+  secure: always
+
+env_variables:
+  STATIC_VERSION: 20180517131237
