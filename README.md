@@ -1,6 +1,6 @@
 # PRPL server on google app engine
 
-The note for serving static files on app engine. using 
+The note for serving static files on app engine.
 
 ## PRPL
 
